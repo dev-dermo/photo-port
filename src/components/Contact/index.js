@@ -24,12 +24,12 @@ const ContactForm = () => {
 			}
 		}
 
-		setFormState({
-			...formState, 
-			[e.target.name]: e.target.value
-		});
-
-		console.log('errorMessage', errorMessage);
+		if (!errorMessage) {
+			setFormState({
+				...formState, 
+				[e.target.name]: e.target.value
+			});
+		}
 	};
 
 	const handleSubmit = (e) => {
@@ -48,7 +48,7 @@ const ContactForm = () => {
 						type="text"
 						name="name"
 						defaultValue={name}
-						onChange={handleChange}
+						onBlur={handleChange}
 					/>
 				</div>
 
@@ -58,7 +58,7 @@ const ContactForm = () => {
 						type="email"
 						name="email"
 						defaultValue={email}
-						onChange={handleChange}
+						onBlur={handleChange}
 					/>
 				</div>
 
@@ -68,8 +68,14 @@ const ContactForm = () => {
 						name="message"
 						rows="5"
 						defaultValue={message}
-						onChange={handleChange}
+						onBlur={handleChange}
 					/>
+
+					{errorMessage && (
+						<div>
+							<p className="error-text">{errorMessage}</p>
+						</div>
+					)}
 				</div>
 
 				<button type="submit">Submit</button>
