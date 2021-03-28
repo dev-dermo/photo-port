@@ -110,12 +110,17 @@ const PhotoList = ({ currentCategory }) => {
 			...image,
 			index: i
 		});
-		setIsModalOpen(true);
+		setIsModalOpen(!isModalOpen);
 	};
 
 	return (
 		<div className="flex-row">
-			{isModalOpen && <Modal currentPhoto={currentPhoto} />}
+			{isModalOpen && (
+				<Modal
+					currentPhoto={currentPhoto}
+					onClose={toggleModal}
+				/>
+			)}
 			{currentPhotos.map((image, index) => {
 				return (
 					<img
